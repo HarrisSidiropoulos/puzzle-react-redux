@@ -1,0 +1,112 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "puzzle.gr",
+  "homepage": "https://github.com/polyptychon/puzzle",
+  "license": "MIT",
+  "author": {
+    "name": "Polyptychon",
+    "email": "webadmin@polyptychon.gr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polyptychon/puzzle"
+  },
+  "dependencies": {
+    "bootstrap-sass": "3.3.6",
+    "isomorphic-fetch": "2.2.1",
+    "jade": "1.11.0",
+    "jade-loader": "0.8.0",
+    "lodash": "4.13.1",
+    "node-sass": "3.8.0",
+    "query-string": "4.2.2",
+    "react": "15.1.0",
+    "react-addons-css-transition-group": "15.2.1",
+    "react-bootstrap": "0.29.5",
+    "react-dom": "15.1.0",
+    "react-redux": "4.4.5",
+    "react-router": "3.0.0-alpha.1",
+    "react-sound": "0.5.0",
+    "redux": "3.5.2",
+    "redux-logger": "2.6.1",
+    "redux-thunk": "2.0.1",
+    "shuffle-array": "1.0.0",
+    "unique-random-array": "1.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "6.0.3",
+    "babel-core": "6.10.4",
+    "babel-eslint": "6.1.0",
+    "babel-loader": "6.2.4",
+    "babel-plugin-__coverage__": "11.0.0",
+    "babel-preset-es2015-webpack": "6.4.1",
+    "babel-preset-es2016": "6.11.0",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-react-hmre": "1.1.0",
+    "babel-preset-stage-2": "6.11.0",
+    "chai": "3.5.0",
+    "cpy-cli": "1.0.1",
+    "css-loader": "0.23.1",
+    "eslint": "2.13.1",
+    "eslint-config-kentcdodds": "6.2.1",
+    "eslint-import-resolver-webpack": "0.3.1",
+    "eslint-plugin-react": "5.2.2",
+    "express": "4.13.3",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.8.5",
+    "ghooks": "1.2.4",
+    "html-webpack-plugin": "2.22.0",
+    "istanbul": "0.4.4",
+    "karma": "1.1.0",
+    "karma-chai": "0.1.0",
+    "karma-chrome-launcher": "1.0.1",
+    "karma-coverage": "1.0.0",
+    "karma-mocha": "1.1.1",
+    "karma-webpack": "1.7.0",
+    "mocha": "2.5.3",
+    "npm-run-all": "2.2.2",
+    "offline-plugin": "3.4.1",
+    "opt-cli": "1.5.1",
+    "pug": "2.0.0-beta3",
+    "pug-loader": "1.0.2",
+    "react-transform-hmr": "1.0.0",
+    "rimraf": "2.5.3",
+    "sass-loader": "3.2.0",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "webpack": "2.1.0-beta.4",
+    "webpack-dev-middleware": "1.5.1",
+    "webpack-dev-server": "2.1.0-beta.0",
+    "webpack-hot-middleware": "2.10.0",
+    "webpack-recompilation-simulator": "1.3.0",
+    "webpack-validator": "2.2.2"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm t"
+    }
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ]
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "webpack --env.prod -p",
+    "postbuild": "sed 's/\\.\\//assets\\//g;s/assets\\/\\.assets//g;' dist/assets/sw.js > dist/sw.js",
+    "build:dev": "webpack --env.dev",
+    "start": "node server",
+    "prod": "NODE_ENV=production node server",
+    "test": "mocha src/js/**/*.test.js  --compilers js:babel-register",
+    "test:karma": "karma start",
+    "watch:test": "npm t -- --watch",
+    "watch:test:karma": "npm test -- --auto-watch --no-single-run",
+    "check-coverage": "istanbul check-coverage --statements 11 --branches 0 --functions 0 --lines 12",
+    "validate": "webpack-validator webpack.config.js --env.prod",
+    "lint": "eslint .",
+    "setup": "npm install && npm run validate",
+    "deploy": "npm run build && firebase deploy"
+  }
+}
