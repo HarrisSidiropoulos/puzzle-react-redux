@@ -9,8 +9,8 @@ export default class PuzzleParts {
   initParts() {
     const a = []
     const l = this.columns * this.rows
-    const w = Math.floor(this.width / this.columns)
-    const h = Math.floor(this.height / this.rows)
+    const w = Math.floor((this.width - (this.gap * this.columns)) / this.columns)
+    const h = Math.floor((this.height - (this.gap * this.rows)) / this.rows)
     this.emptyIndex = l-1;
     for (let i=0;i<l;i++) {
       a.push(
@@ -18,10 +18,10 @@ export default class PuzzleParts {
           index: i,
           label: i + 1,
           empty: i==l-1,
-          x: 0,
-          y: 0,
-          w: w - this.gap,
-          h: h - this.gap
+          x: this.gap/2,
+          y: this.gap/2,
+          w: w,
+          h: h
         }
       )
     }
@@ -33,13 +33,13 @@ export default class PuzzleParts {
     }
   }
   getParts(parts) {
-    let x = 0;
-    let y = 0;
+    let x = this.gap/2;
+    let y = this.gap/2;
     parts.forEach((item, index)=> {
       item.x = x;
       item.y = y;
       if (Math.ceil(x + item.w) >= this.width-10) {
-        x = 0;
+        x = this.gap/2;
         y += item.h + this.gap
       } else {
         x += item.w + this.gap
