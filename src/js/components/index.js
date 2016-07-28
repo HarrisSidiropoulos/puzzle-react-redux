@@ -1,6 +1,7 @@
 import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {checkPuzzlePartPosition, isPuzzleSolved, shufflePuzzle} from 'actions'
+
 require('./styles.scss')
 const images = [
   require('./images/image001.jpg'),
