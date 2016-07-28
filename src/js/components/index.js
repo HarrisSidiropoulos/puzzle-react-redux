@@ -1,6 +1,6 @@
 import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {getPuzzlePartPosition} from 'actions'
+import {checkPuzzlePartPosition, isPuzzleSolved, shufflePuzzle} from 'actions'
 require('./styles.scss')
 const images = [
   require('./images/image001.jpg'),
@@ -8,6 +8,10 @@ const images = [
 ]
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    props.shufflePuzzle()
+  }
   getStyles({x,y,w,h,bx,by}) {
     return {
       left:`${x}px`,
@@ -50,12 +54,14 @@ class Main extends Component {
 
 Main.propTypes = {
   parts: PropTypes.array.isRequired,
+  shufflePuzzle: PropTypes.func,
   partClick: PropTypes.func
 }
 
 const mapStateToProps = ({ puzzle } ) => puzzle;
 const mapDispatchToProps = (dispatch) => ({
-  partClick: index => dispatch(getPuzzlePartPosition(index))
+  partClick: index => dispatch(checkPuzzlePartPosition(index)),
+  shufflePuzzle: ()=> dispatch(shufflePuzzle())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Main)
