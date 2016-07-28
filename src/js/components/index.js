@@ -10,8 +10,8 @@ const images = [
 class Main extends Component {
   getStyles({x,y,w,h,bx,by}) {
     return {
-      top:`${y}px`,
       left:`${x}px`,
+      top:`${y}px`,
       ...this.getBgStyles(bx,by),
       ...this.getSizeStyles(w,h)
     }
