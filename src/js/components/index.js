@@ -20,10 +20,15 @@ class Main extends Component {
       ...this.getSizeStyles(w,h)
     }
   }
+  getBgImageStyles(solved=true) {
+    return solved ? {
+      backgroundImage: `url(${images[0]})`
+    } : {}
+  }
   getBgStyles(x,y) {
     return {
-      backgroundImage: `url(${images[0]})`,
-      backgroundPosition: `-${x}px -${y}px`
+      backgroundPosition: `-${x}px -${y}px`,
+      ...this.getBgImageStyles()
     }
   }
   getSizeStyles(w,h) {
@@ -33,10 +38,10 @@ class Main extends Component {
     }
   }
   render() {
-    const {parts, partClick, emptyIndex} = this.props
+    const {parts, partClick, emptyIndex, isPuzzleSolved} = this.props
     return (
       <div className="container">
-        <ul className="puzzle">
+        <ul className={isPuzzleSolved?'puzzle solved':'puzzle'} style={this.getBgImageStyles(isPuzzleSolved)}>
           {
             parts.map((part,index)=> (
               <li key={index} style={this.getStyles(part)} className={part.empty?'empty':''}>
@@ -53,6 +58,7 @@ class Main extends Component {
 }
 
 Main.propTypes = {
+  isPuzzleSolved: PropTypes.bool.isRequired,
   parts: PropTypes.array.isRequired,
   shufflePuzzle: PropTypes.func,
   partClick: PropTypes.func
