@@ -10,9 +10,9 @@ class Main extends Component {
       <div className="container">
         <ul className="puzzle">
           {
-            parts.map(({x,y,label,empty,index},i)=> (
-              <li key={i} style={{top:`${y}px`,left:`${x}px`}} className={empty?'empty':''}>
-                <a href="javascript:" onClick={()=>partClick(index)}>
+            parts.map(({x,y,w,h,label,empty,index},i)=> (
+              <li key={i} style={{top:`${y}px`,left:`${x}px`,width:`${w}px`,height:`${h}px`}} className={empty?'empty':''}>
+                <a style={{width:`${w}px`,height:`${h}px`}} href="javascript:" onClick={()=>partClick(index)}>
                   <span className="number">{label}</span>
                 </a>
               </li>

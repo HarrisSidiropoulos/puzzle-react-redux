@@ -1,5 +1,6 @@
 export default class PuzzleParts {
-  constructor(columns=4, rows=3, width=800, height=600) {
+  constructor(columns=4, rows=3, width=800, height=600, gap=4) {
+    this.gap = gap;
     this.columns = columns;
     this.rows = rows;
     this.width = width;
@@ -8,8 +9,8 @@ export default class PuzzleParts {
   initParts() {
     const a = []
     const l = this.columns * this.rows
-    const w = this.width / this.columns
-    const h = this.height / this.rows
+    const w = Math.floor(this.width / this.columns)
+    const h = Math.floor(this.height / this.rows)
     this.emptyIndex = l-1;
     for (let i=0;i<l;i++) {
       a.push(
@@ -19,8 +20,8 @@ export default class PuzzleParts {
           empty: i==l-1,
           x: 0,
           y: 0,
-          w: w,
-          h: h
+          w: w - this.gap,
+          h: h - this.gap
         }
       )
     }
@@ -37,11 +38,11 @@ export default class PuzzleParts {
     parts.forEach((item, index)=> {
       item.x = x;
       item.y = y;
-      if (x + item.w === this.width) {
+      if (Math.ceil(x + item.w) >= this.width-10) {
         x = 0;
-        y += item.h
+        y += item.h + this.gap
       } else {
-        x += item.w
+        x += item.w + this.gap
       }
     })
     return parts
