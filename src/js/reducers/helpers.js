@@ -7,7 +7,7 @@ export default class PuzzleParts {
   }
   initParts() {
     const a = []
-    const l = this.columns*this.rows
+    const l = this.columns * this.rows
     const w = this.width / this.columns
     const h = this.height / this.rows
     this.emptyIndex = l-1;
@@ -57,13 +57,11 @@ export default class PuzzleParts {
         return index
     }
   }
-  changeParts(i, parts) {
-    const newIndex = this.getNewIndex(i);
-    if (i!=newIndex) {
+  changeParts(oldIndex, parts) {
+    const newIndex = this.getNewIndex(oldIndex);
+    if (oldIndex!=newIndex) {
       const emptyPart = parts.find(({index})=>newIndex===index)
-      const part = parts.find(({index})=>i===index)
-      // parts.splice(emptyIndex, 1, part)
-      // parts.splice(index, 1, emptyPart)
+      const part = parts.find(({index})=>oldIndex===index)
       const partX = part.x
       const partY = part.y
       part.x = emptyPart.x
@@ -71,8 +69,8 @@ export default class PuzzleParts {
       emptyPart.x = partX
       emptyPart.y = partY
       part.index = newIndex
-      emptyPart.index = i
-      this.emptyIndex = i
+      emptyPart.index = oldIndex
+      this.emptyIndex = oldIndex
     }
     return { parts:parts.slice(), emptyIndex:this.emptyIndex }
   }
