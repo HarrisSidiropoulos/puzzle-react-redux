@@ -1,9 +1,9 @@
 import {PUZZLE_PART_POSITION} from 'actions'
 import PuzzleParts from './helpers'
+
 const p = new PuzzleParts()
-const INITIAL_STATE = {
-  ...p.initParts()
-}
+const INITIAL_STATE = p.initParts()
+p.shuffle(INITIAL_STATE.parts)
 
 export default function puzzle(state = INITIAL_STATE, action) {
   switch (action.type) {

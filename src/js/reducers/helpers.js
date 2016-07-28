@@ -47,14 +47,31 @@ export default class PuzzleParts {
     return parts
   }
   getNewIndex(index) {
-    switch(this.emptyIndex) {
-      case index - this.columns:
-      case index + this.columns:
-      case index + 1:
-      case index - 1:
-        return this.emptyIndex
-      default:
-        return index
+    let a = this.getNeigborParts()
+    if (a.indexOf(index)>=0) {
+      return this.emptyIndex;
+    }
+    return index;
+  }
+  getNeigborParts() {
+    let a = []
+    a.push(this.emptyIndex - this.columns)
+    a.push(this.emptyIndex + this.columns)
+    if ((this.emptyIndex+1)%this.columns!==0) {
+      a.push(this.emptyIndex + 1)
+    }
+    if (this.emptyIndex%this.columns!==0) {
+      a.push(this.emptyIndex - 1)
+    }
+    return a.filter(value => value>=0 && value<this.columns * this.rows)
+  }
+  getRandomIndex() {
+    let a = this.getNeigborParts()
+    return a[Math.floor(Math.random()*a.length)]
+  }
+  shuffle(parts) {
+    for (let i=0;i<10000;i++) {
+      this.changeParts(this.getRandomIndex(), parts)
     }
   }
   changeParts(oldIndex, parts) {
