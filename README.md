@@ -1,2 +1,2 @@
 #puzzle
-http://HarrisSidiropoulos.github.io/puzzle-react-redux/
+https://puzzle-49a1d.firebaseapp.com/
