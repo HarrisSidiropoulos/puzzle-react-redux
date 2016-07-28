@@ -1,2 +1,2 @@
 #puzzle
-http://polyptychon.github.io/puzzle/
+http://polyptychon.github.io/puzzle-react-redux/
