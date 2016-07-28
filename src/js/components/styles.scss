@@ -1,0 +1,51 @@
+$w: 196px;
+$h: 196px;
+.container {
+  width: 800px;
+  height: 600px;
+  padding: 15px;
+  margin: 0 auto;
+  background: white;
+}
+.puzzle {
+  list-style: none;
+  display: table;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  background: #CCC;
+  li {
+    float: left;
+    margin: 2px;
+    box-sizing: border-box;
+    width: $w;
+    height: $h;
+    position: absolute;
+    transition: top .3s ease-out, left .3s ease-out;
+    a {
+      background: no-repeat;
+      text-decoration: none;
+      text-align: center;
+      vertical-align: middle;
+      box-sizing: content-box;
+      display: table-cell;
+      background-color: #999;
+      overflow: hidden;
+      width: $w;
+      height: $h;
+    }
+    &.empty a {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+.number {
+  cursor: pointer;
+  text-shadow: 0px 0px 4px #000000;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+}

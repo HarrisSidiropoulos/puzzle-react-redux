@@ -20,10 +20,6 @@ module.exports = env => {
         app: removeEmpty([
           ifDev('webpack-hot-middleware/client?reload=true'),
           './js/index.js'
-        ]),
-        bootstrap: removeEmpty([
-          ifDev('webpack-hot-middleware/client?reload=true'),
-          './sass/main.scss'
         ])
       },
     output: {
