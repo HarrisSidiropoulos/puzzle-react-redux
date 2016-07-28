@@ -11,6 +11,8 @@ export default class PuzzleParts {
     const l = this.columns * this.rows
     const w = Math.floor((this.width - (this.gap * this.columns)) / this.columns)
     const h = Math.floor((this.height - (this.gap * this.rows)) / this.rows)
+    let x = this.gap/2;
+    let y = this.gap/2;
     this.emptyIndex = l-1;
     for (let i=0;i<l;i++) {
       a.push(
@@ -18,34 +20,27 @@ export default class PuzzleParts {
           index: i,
           label: i + 1,
           empty: i==l-1,
-          x: this.gap/2,
-          y: this.gap/2,
+          bx: x,
+          by: y,
+          x: x,
+          y: y,
           w: w,
           h: h
         }
       )
+      if (Math.ceil(x + w) >= this.width-10) {
+        x = this.gap/2;
+        y += h + this.gap
+      } else {
+        x += w + this.gap
+      }
     }
     return {
-      parts: this.getParts(a),
+      parts: a,
       emptyIndex: a.length-1,
       columns: this.columns,
       rows: this.rows
     }
-  }
-  getParts(parts) {
-    let x = this.gap/2;
-    let y = this.gap/2;
-    parts.forEach((item, index)=> {
-      item.x = x;
-      item.y = y;
-      if (Math.ceil(x + item.w) >= this.width-10) {
-        x = this.gap/2;
-        y += item.h + this.gap
-      } else {
-        x += item.w + this.gap
-      }
-    })
-    return parts
   }
   getNewIndex(index) {
     let a = this.getNeigborParts()

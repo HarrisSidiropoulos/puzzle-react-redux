@@ -31,12 +31,11 @@ $h: 196px;
       vertical-align: middle;
       box-sizing: content-box;
       display: table-cell;
-      background-color: #999;
       overflow: hidden;
       width: $w;
       height: $h;
     }
-    &.empty a {
+    &.empty {
       opacity: 0;
       pointer-events: none;
     }
