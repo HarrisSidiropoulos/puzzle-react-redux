@@ -39,10 +39,10 @@ class Main extends Component {
     }
   }
   render() {
-    const {parts, partClick, emptyIndex, isPuzzleSolved} = this.props
+    const {parts, partClick, emptyIndex, isPuzzleSolved, shufflePuzzle} = this.props
     return (
-      <div className="container">
-        <ul className={isPuzzleSolved?'puzzle solved':'puzzle'} style={this.getBgImageStyles(isPuzzleSolved)}>
+      <div className={isPuzzleSolved?'container solved':'container'}>
+        <ul className="puzzle" style={this.getBgImageStyles(isPuzzleSolved)}>
           {
             parts.map((part,index)=> (
               <li key={index} style={this.getStyles(part)} className={part.empty?'empty':''}>
@@ -53,6 +53,7 @@ class Main extends Component {
             ))
           }
         </ul>
+        <a href="javascript:" onClick={()=> shufflePuzzle()} className="restart-puzzle">Play again</a>
       </div>
     )
   }

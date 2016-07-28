@@ -6,6 +6,7 @@ $h: 196px;
   padding: 15px;
   margin: 0 auto;
   background: white;
+  position: relative;
 }
 .puzzle {
   list-style: none;
@@ -41,8 +42,37 @@ $h: 196px;
     }
   }
 }
-.puzzle.solved * {
+.restart-puzzle {
+  width: 100px;
+  height: 1em;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  text-align: center;
+  padding: 80px 40px;
+  background: green;
+  color: white;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  margin: -90px 0 0 -90px;
+  text-decoration: none;
+  box-shadow: 0 0 8px #000;
   display: none;
+  &:active {
+    box-shadow: 0 0 0px #000;
+  }
+  &:hover {
+    background: darken(green, 10%);
+  }
+}
+.solved {
+  .puzzle * {
+    display: none;
+  }
+  .restart-puzzle {
+    display: block;
+  }
 }
 .number {
   cursor: pointer;
