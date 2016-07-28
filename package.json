@@ -109,6 +109,6 @@
     "lint": "eslint .",
     "setup": "npm install && npm run validate",
     "deploy": "npm run build && firebase deploy",
-    "deploy:github": "gh-pages -d dist"
+    "deploy:github": "npm run build && gh-pages -d dist"
   }
 }
