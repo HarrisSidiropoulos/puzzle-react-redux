@@ -70,8 +70,8 @@ export default class PuzzleParts {
     let a = this.getNeigborParts()
     return a[Math.floor(Math.random()*a.length)]
   }
-  shuffle(parts) {
-    for (let i=0;i<10000;i++) {
+  shuffle(parts, times=10000) {
+    for (let i=0;i<times;i++) {
       this.changeParts(this.getRandomIndex(), parts)
     }
   }
