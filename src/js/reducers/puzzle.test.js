@@ -15,7 +15,7 @@ describe('puzzle reducer', () => {
     });
   });
   describe(`${SHUFFLE_PUZZLE} action`, () => {
-    it('should be equal to initial state', () => {
+    it('should not be equal to initial state', () => {
       const state = puzzle(INITIAL_STATE, shufflePuzzle(INITIAL_STATE.parts, 100))
       expect(state.parts).to.not.be.equal(INITIAL_STATE.parts)
     });
