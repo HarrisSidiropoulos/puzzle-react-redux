@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import configureStore from './configureStore'
-import {INITIAL_STATE} from '../reducers/puzzle'
 
 describe('Store', () => {
   let store = configureStore();

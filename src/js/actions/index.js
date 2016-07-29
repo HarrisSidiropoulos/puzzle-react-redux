@@ -8,10 +8,15 @@ function delay(time) {
   });
 }
 
-export const getPuzzlePartPosition = (part)=> ({
-  type: PUZZLE_PART_POSITION,
-  part: part
-});
+export const getPuzzlePartPosition = (part=10)=> {
+  if (typeof part!=="number") {
+    throw(new TypeError("Value should be string"))
+  }
+  return ({
+    type: PUZZLE_PART_POSITION,
+    part: part
+  });
+}
 
 export const isPuzzleSolved = ()=> ({
   type: IS_PUZZLE_SOLVED

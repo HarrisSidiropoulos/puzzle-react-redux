@@ -1,5 +1,5 @@
 import {PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from '../actions'
-import PuzzleParts from './helpers'
+import PuzzleParts from './PuzzleParts'
 
 const p = new PuzzleParts()
 export const INITIAL_STATE = {
