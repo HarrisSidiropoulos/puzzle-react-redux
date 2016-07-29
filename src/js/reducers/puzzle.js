@@ -12,7 +12,8 @@ export default function puzzle(state = INITIAL_STATE, action) {
     case PUZZLE_PART_POSITION:
       return {
         ...state,
-        ...p.changeParts(action.part, state.parts)
+        parts: p.changeParts(action.part, state.parts),
+        emptyIndex: p.emptyIndex
       }
     case IS_PUZZLE_SOLVED:
       return {
@@ -20,10 +21,9 @@ export default function puzzle(state = INITIAL_STATE, action) {
         isPuzzleSolved: p.isPuzzleSolved(state.parts)
       }
     case SHUFFLE_PUZZLE:
-      p.shuffle(state.parts)
       return {
         ...state,
-        parts: state.parts.slice(),
+        parts: p.shuffle(state.parts),
         isPuzzleSolved: false
       }
     default:

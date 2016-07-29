@@ -5,6 +5,7 @@ export default class PuzzleParts {
     this.rows = rows;
     this.width = width;
     this.height = height;
+    this.emptyIndex = columns*rows -1
   }
   initParts() {
     const a = []
@@ -70,10 +71,12 @@ export default class PuzzleParts {
   }
   shuffle(parts, times=10000) {
     for (let i=0;i<times;i++) {
-      this.changeParts(this.getRandomIndex(), parts)
+      parts = this.changeParts(this.getRandomIndex(), parts)
     }
+    return parts
   }
   changeParts(oldIndex, parts) {
+    // parts = this.cloneParts(parts);
     const newIndex = this.getNewIndex(oldIndex);
     if (oldIndex!=newIndex) {
       const emptyPart = parts.find(({index})=>newIndex===index)
@@ -88,6 +91,13 @@ export default class PuzzleParts {
       emptyPart.index = oldIndex
       this.emptyIndex = oldIndex
     }
-    return { parts:parts.slice(), emptyIndex:this.emptyIndex }
+    return parts.slice()
+  }
+  cloneParts(parts) {
+    const newparts = []
+    parts.forEach((item)=> {
+      newparts.push({...item})
+    })
+    return newparts
   }
 }
