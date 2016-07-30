@@ -44,7 +44,7 @@ export default class PuzzleParts {
     }
   }
   isPuzzleSolved(parts) {
-    return parts.every(({index},i)=>(index==i))
+    return parts.every(({index},i)=>index===i)
   }
   getNewIndex(index) {
     let a = this.getNeigborParts()
