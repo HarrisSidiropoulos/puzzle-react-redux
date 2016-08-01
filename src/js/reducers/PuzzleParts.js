@@ -75,7 +75,7 @@ export default class PuzzleParts {
     for (let i=0;i<times;i++) {
       this.parts = this.changeParts(this.getRandomIndex())
     }
-    return this.parts.slice()
+    return this.parts
   }
   changeParts(oldIndex) {
     const newIndex = this.getNewIndex(oldIndex);
