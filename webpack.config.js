@@ -12,7 +12,7 @@ module.exports = env => {
   const ifProd = value => specifyProp(env.prod, value)
   const ifDev = value => specifyProp(!env.prod, value)
   const removeEmpty = array => array.filter(i => !!i)
-  const assetsPath = env.prod?'/assets/':''
+  const assetsPath = env.prod?'assets/':''
   const indexPath = env.prod?'../':''
   return {
     entry:
@@ -24,7 +24,7 @@ module.exports = env => {
       },
     output: {
       filename: env.prod ? 'bundle.[name].[chunkhash].js' : '[name].js',
-      path: resolve(__dirname, `dist${assetsPath}`),
+      path: resolve(__dirname, `dist/${assetsPath}`),
       pathinfo: !env.prod,
       publicPath: assetsPath
     },
