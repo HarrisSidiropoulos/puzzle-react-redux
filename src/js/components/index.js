@@ -1,6 +1,7 @@
 import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {checkPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, initAndShufflePuzzle} from 'actions'
+import OfflineUpdate from './offline-update'
 
 require('./styles.scss')
 const images = [
@@ -41,19 +42,22 @@ class Main extends Component {
   render() {
     const {parts, partClick, emptyIndex, isPuzzleSolved, shufflePuzzle} = this.props
     return (
-      <div className={isPuzzleSolved?'container solved':'container'}>
-        <ul className="puzzle" style={this.getBgImageStyles(isPuzzleSolved)}>
-          {
-            parts.map((part,index)=> (
-              <li key={index} style={this.getStyles(part)} className={part.empty?'empty':''}>
-                <a style={this.getSizeStyles(part.w,part.h)} href="javascript:" onClick={()=>partClick(part.index)}>
-                  <span className="number">{part.label}</span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <a href="javascript:" onClick={()=> shufflePuzzle()} className="restart-puzzle">Play again</a>
+      <div>
+        <OfflineUpdate />
+        <div className={isPuzzleSolved?'container solved':'container'}>
+          <ul className="puzzle" style={this.getBgImageStyles(isPuzzleSolved)}>
+            {
+              parts.map((part,index)=> (
+                <li key={index} style={this.getStyles(part)} className={part.empty?'empty':''}>
+                  <a style={this.getSizeStyles(part.w,part.h)} href="javascript:" onClick={()=>partClick(part.index)}>
+                    <span className="number">{part.label}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <a href="javascript:" onClick={()=> shufflePuzzle()} className="restart-puzzle">Play again</a>
+        </div>
       </div>
     )
   }
