@@ -1,4 +1,4 @@
-import {PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from '../actions'
+import {PUZZLE_PART_POSITION, INIT_PUZZLE, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from '../actions'
 import PuzzleParts from './PuzzleParts'
 
 const p = new PuzzleParts()
@@ -19,6 +19,11 @@ export default function puzzle(state = INITIAL_STATE, action) {
       return {
         ...state,
         isPuzzleSolved: p.isPuzzleSolved()
+      }
+    case INIT_PUZZLE:
+      return {
+        ...p.initParts(),
+        isPuzzleSolved: false
       }
     case SHUFFLE_PUZZLE:
       return {
