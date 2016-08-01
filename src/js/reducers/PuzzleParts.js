@@ -6,6 +6,7 @@ export default class PuzzleParts {
     this.width = width;
     this.height = height;
     this.emptyIndex = columns*rows -1
+    this.parts = []
   }
   initParts() {
     const a = []
@@ -36,6 +37,7 @@ export default class PuzzleParts {
         x += w + this.gap
       }
     }
+    this.parts = a;
     return {
       parts: a,
       emptyIndex: a.length-1,
@@ -43,8 +45,8 @@ export default class PuzzleParts {
       rows: this.rows
     }
   }
-  isPuzzleSolved(parts) {
-    return parts.every(({index},i)=>index===i)
+  isPuzzleSolved() {
+    return this.parts.every(({index},i)=>index===i)
   }
   getNewIndex(index) {
     let a = this.getNeigborParts()
@@ -69,18 +71,17 @@ export default class PuzzleParts {
     let a = this.getNeigborParts()
     return a[Math.floor(Math.random()*a.length)]
   }
-  shuffle(parts, times=10000) {
+  shuffle(times=10000) {
     for (let i=0;i<times;i++) {
-      parts = this.changeParts(this.getRandomIndex(), parts)
+      this.parts = this.changeParts(this.getRandomIndex())
     }
-    return parts
+    return this.parts.slice()
   }
-  changeParts(oldIndex, parts) {
-    // parts = this.cloneParts(parts);
+  changeParts(oldIndex) {
     const newIndex = this.getNewIndex(oldIndex);
     if (oldIndex!=newIndex) {
-      const emptyPart = parts.find(({index})=>newIndex===index)
-      const part = parts.find(({index})=>oldIndex===index)
+      const emptyPart = this.parts.find(({index})=>newIndex===index)
+      const part = this.parts.find(({index})=>oldIndex===index)
       const partX = part.x
       const partY = part.y
       part.x = emptyPart.x
@@ -91,13 +92,6 @@ export default class PuzzleParts {
       emptyPart.index = oldIndex
       this.emptyIndex = oldIndex
     }
-    return parts.slice()
-  }
-  cloneParts(parts) {
-    const newparts = []
-    parts.forEach((item)=> {
-      newparts.push({...item})
-    })
-    return newparts
+    return this.parts.slice()
   }
 }

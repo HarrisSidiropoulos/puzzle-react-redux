@@ -29,11 +29,8 @@ describe('puzzle reducer', () => {
   describe(`${SHUFFLE_PUZZLE} action`, () => {
     let state = {}
     beforeEach(()=> {
-      state = puzzle(INITIAL_STATE, shufflePuzzle(INITIAL_STATE.parts, 100))
+      state = puzzle(INITIAL_STATE, shufflePuzzle())
     })
-    it('should not be equal to initial state', () => {
-      expect(state.parts).to.not.be.equal(INITIAL_STATE.parts)
-    });
     it('should not be ordered by index', () => {
       expect(state.parts).to.not.satisfy((parts)=> parts.every(({index},i)=>index===i))
     });
