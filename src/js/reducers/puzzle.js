@@ -1,3 +1,4 @@
+/*eslint indent: */
 import {PUZZLE_PART_POSITION, INIT_PUZZLE, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from '../actions'
 import PuzzleParts from './PuzzleParts'
 

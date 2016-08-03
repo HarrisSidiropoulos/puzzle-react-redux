@@ -1,6 +1,6 @@
 import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {checkPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, initAndShufflePuzzle} from 'actions'
+import {checkPuzzlePartPosition, initAndShufflePuzzle} from 'actions'
 import OfflineUpdate from './offline-update'
 
 require('./styles.scss')
@@ -36,11 +36,11 @@ class Main extends Component {
   getSizeStyles(w,h) {
     return {
       width:`${w}px`,
-      height:`${h}px`,
+      height:`${h}px`
     }
   }
   render() {
-    const {parts, partClick, emptyIndex, isPuzzleSolved, shufflePuzzle} = this.props
+    const {parts, partClick, isPuzzleSolved, shufflePuzzle} = this.props
     return (
       <div>
         <OfflineUpdate />

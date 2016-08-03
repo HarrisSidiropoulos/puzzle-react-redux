@@ -1,5 +1,5 @@
+/* eslint no-console: 0 */
 import React, {Component} from 'react'
-import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 require('./styles.scss')
 
 class OfflineUpdate extends Component {
@@ -10,7 +10,7 @@ class OfflineUpdate extends Component {
       message: "Quiz has been updated.",
       hidden: true
     }
-    if (process.env.NODE_ENV!=='production') {
+    if (process.env.NODE_ENV!=='production') { //eslint-disable-line
       return;
     }
     const {install} = require('offline-plugin/runtime')
