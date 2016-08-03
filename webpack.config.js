@@ -17,6 +17,7 @@ module.exports = env => {
   return {
     entry:
       {
+        vendor: ['react', 'react-dom'],
         app: removeEmpty([
           ifDev('webpack-hot-middleware/client?reload=true'),
           './js/index.js'
@@ -52,6 +53,7 @@ module.exports = env => {
     },
     recordsPath: resolve(__dirname, './webpack-records.json'),
     plugins: removeEmpty([
+      ifProd(new webpack.optimize.CommonsChunkPlugin({name:'vendor'})),
       ifProd(new ExtractTextPlugin('bundle.[name]-[hash].min.css')),
       new HtmlWebpackPlugin({
         filename: `${indexPath}index.html`,

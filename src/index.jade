@@ -15,4 +15,4 @@ html(lang='en')
       if htmlWebpackPlugin.options.NODE_ENV==="production"
         each jsFile in htmlWebpackPlugin.files.js
           if (!new RegExp(/(sw|bootstrap)/).test(jsFile))
-            script(type="text/javascript" src=jsFile async)
+            script(type="text/javascript" src=jsFile)
