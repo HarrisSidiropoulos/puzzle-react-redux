@@ -17,7 +17,7 @@ module.exports = env => {
   return {
     entry:
       {
-        vendor: ['react', 'react-dom'],
+        vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'offline-plugin/runtime'],
         app: removeEmpty([
           ifDev('webpack-hot-middleware/client?reload=true'),
           './js/index.js'
@@ -42,7 +42,8 @@ module.exports = env => {
         {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff"},
         {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"},
         {test: /\.(jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=15000"},
-        {test: /\.(png|gif|mp3)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"}
+        {test: /\.(png|gif|mp3)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"},
+        ifProd({ test: /\.js$/, loader: "strip-loader?strip[]=console.log" })
       ]),
     },
     resolve: {
