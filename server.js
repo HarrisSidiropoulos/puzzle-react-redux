@@ -1,7 +1,6 @@
 /* eslint no-console: 0 */
 
 const path = require('path');
-const fs = require('fs');
 const express = require('express');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
