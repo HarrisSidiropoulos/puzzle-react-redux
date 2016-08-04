@@ -64,6 +64,16 @@ describe('PuzzleParts Class', ()=> {
         const result = changedParts.map(({index})=>index)
         expect(result).to.be.eql([0,1,2,3,4,5,6,7,8,9,10,11])
       });
+      it(`should do nothing if index is not close to emptyIndex`, () => {
+        const changedParts = p.changeParts(1)
+        const result = changedParts.map(({index})=>index)
+        expect(result).to.be.eql([0,1,2,3,4,5,6,7,8,9,10,11])
+      });
+      it(`should do nothing if index is emptyIndex`, () => {
+        const changedParts = p.changeParts(11)
+        const result = changedParts.map(({index})=>index)
+        expect(result).to.be.eql([0,1,2,3,4,5,6,7,8,9,10,11])
+      });
     });
     describe('shuffle method', ()=> {
       it(`should change index randomly`, () => {
