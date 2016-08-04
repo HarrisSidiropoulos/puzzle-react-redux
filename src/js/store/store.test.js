@@ -20,7 +20,9 @@ describe('Store', () => {
   });
   describe('initAndShufflePuzzle', ()=> {
     it('should be true', () => {
-      store.dispatch(initAndShufflePuzzle()).then(()=> {
+      const initAction = initAndShufflePuzzle()
+      expect(store.getState().puzzle.parts).to.satisfy((parts)=> parts.every(({index},i)=>index===i))
+      store.dispatch(initAction).then(()=> {
         expect(store.getState().puzzle.parts).to.not.satisfy((parts)=> parts.every(({index},i)=>index===i))
       })
     });
