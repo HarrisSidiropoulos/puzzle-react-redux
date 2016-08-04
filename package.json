@@ -84,7 +84,7 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run validate"
+      "pre-commit": "opt --in pre-commit --exec \"npm run validate\""
     }
   },
   "babel": {
