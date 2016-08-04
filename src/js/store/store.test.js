@@ -30,10 +30,14 @@ describe('Store', () => {
     });
   });
   describe('checkPuzzlePartPosition', ()=> {
+    const initAction = store.dispatch(checkPuzzlePartPosition())
     it('should be true', () => {
-      store.dispatch(checkPuzzlePartPosition()).then(()=> {
+      expect(true).to.be.true
+    });
+    it('should be true', () => {
+      initAction.then(()=> {
         expect(true).to.be.true
-      })
+      });
     });
   });
 });
