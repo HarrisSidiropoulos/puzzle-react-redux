@@ -1,15 +1,17 @@
 const webpackEnv = {test:true}
 const webpackConfig = require('./webpack.config.js')(webpackEnv)
 const testGlob = 'src/js/**/*.test.js'
-// const srcGlob = 'src/js/**/*!(test|stub).js'
+const srcGlob = 'src/js/**/*!(test|stub).js'
 process.env.BABEL_ENV = 'test'
 module.exports = function setKarmaConfig(config) {
   config.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
-    files: [testGlob],
+    exclude: ['src/js/*.js'],
+    files: [testGlob,srcGlob],
     preprocessors: {
-      [testGlob]: ['webpack']
+      [testGlob]: ['webpack'],
+      [srcGlob]: ['webpack']
     },
     webpack: webpackConfig,
     webpackMiddleware: {noInfo:true},
