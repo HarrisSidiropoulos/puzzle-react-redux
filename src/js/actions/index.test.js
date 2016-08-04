@@ -1,5 +1,6 @@
+/* eslint no-console: */
 import {expect} from 'chai';
-import {getPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from './index'
+import {delay, getPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, initAndShufflePuzzle, checkPuzzlePartPosition, PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from './index'
 
 describe('Actions', () => {
   describe('getPuzzlePartPosition', () => {
@@ -47,6 +48,23 @@ describe('Actions', () => {
       it('should be string', () => {
         expect(shufflePuzzle().type).to.be.a('string')
       });
+    });
+  });
+  describe('initAndShufflePuzzle', () => {
+    it('should return a function', () => {
+      expect(initAndShufflePuzzle()).to.be.func
+    });
+  });
+  describe('checkPuzzlePartPosition', () => {
+    it('should return a function', () => {
+      expect(checkPuzzlePartPosition()).to.be.func
+    });
+  });
+  describe('delay', () => {
+    it('should be true', () => {
+      delay(100).then(()=> {
+        expect(true).to.be.true
+      })
     });
   });
 });

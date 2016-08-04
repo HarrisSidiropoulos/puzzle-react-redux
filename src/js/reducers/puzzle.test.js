@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import puzzle, {INITIAL_STATE} from './puzzle'
-import {getPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED} from '../actions'
+import {getPuzzlePartPosition, isPuzzleSolved, shufflePuzzle, initPuzzle, PUZZLE_PART_POSITION, SHUFFLE_PUZZLE, IS_PUZZLE_SOLVED, INIT_PUZZLE} from '../actions'
 
 const emptyIndex = 11;
 const emptyPart = INITIAL_STATE.parts[emptyIndex];
@@ -8,10 +8,19 @@ const emptyPartX = emptyPart.x;
 const emptyPartY = emptyPart.y;
 
 describe('puzzle reducer', () => {
+  describe(`${INIT_PUZZLE} action`, () => {
+    const state = puzzle(INITIAL_STATE, initPuzzle())
+    it('should be equal to initial state', () => {
+      expect(state.parts).to.be.eql(INITIAL_STATE.parts)
+    });
+    it('should be ordered by index', () => {
+      expect(state.parts).to.satisfy((parts)=> parts.every(({index},i)=>index===i))
+    });
+  });
   describe(`${IS_PUZZLE_SOLVED} action`, () => {
     const state = puzzle(INITIAL_STATE, isPuzzleSolved())
     it('should be equal to initial state', () => {
-      expect(state.parts).to.be.equal(INITIAL_STATE.parts)
+      expect(state.parts).to.be.eql(INITIAL_STATE.parts)
     });
     it('should be ordered by index', () => {
       expect(state.parts).to.satisfy((parts)=> parts.every(({index},i)=>index===i))

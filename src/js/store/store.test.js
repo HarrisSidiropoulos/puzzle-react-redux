@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import configureStore from './configureStore'
+import {initAndShufflePuzzle, checkPuzzlePartPosition} from '../actions'
 
 describe('Store', () => {
   let store = configureStore();
@@ -15,6 +16,20 @@ describe('Store', () => {
     });
     it('should have keys: parts, emptyIndex, columns, rows, isPuzzleSolved', () => {
       expect(store.getState().puzzle).to.have.all.keys('parts','emptyIndex','columns','rows', 'isPuzzleSolved')
+    });
+  });
+  describe('initAndShufflePuzzle', ()=> {
+    it('should be true', () => {
+      store.dispatch(initAndShufflePuzzle()).then(()=> {
+        expect(store.getState().puzzle.parts).to.not.satisfy((parts)=> parts.every(({index},i)=>index===i))
+      })
+    });
+  });
+  describe('checkPuzzlePartPosition', ()=> {
+    it('should be true', () => {
+      store.dispatch(checkPuzzlePartPosition()).then(()=> {
+        expect(true).to.be.true
+      })
     });
   });
 });

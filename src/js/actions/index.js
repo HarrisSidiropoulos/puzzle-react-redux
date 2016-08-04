@@ -3,7 +3,7 @@ export const IS_PUZZLE_SOLVED = 'is-puzzle-solved';
 export const SHUFFLE_PUZZLE = 'shuffle-puzzle';
 export const INIT_PUZZLE = 'init-puzzle';
 
-function delay(time) {
+export function delay(time) {
   return new Promise(function (fulfill) {
     setTimeout(fulfill, time);
   });
