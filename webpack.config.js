@@ -13,12 +13,11 @@ module.exports = env => {
   const ifDev = value => specifyProp(!env.prod, value)
   const removeEmpty = obj => {
     if (Array.isArray(obj)) {
-      obj = obj.filter(i => !!i)
-    } else {
-      for (var i in obj) {
-        if (obj[i] === null || obj[i] === undefined) {
-          delete obj[i];
-        }
+      return obj.filter(i => !!i)
+    }
+    for (var i in obj) {
+      if (obj[i] === null || obj[i] === undefined) {
+        delete obj[i];
       }
     }
     return obj;
