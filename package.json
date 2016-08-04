@@ -84,14 +84,21 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm t"
+      "pre-commit": "opt --in pre-commit --exec \"npm run validate\""
     }
   },
   "babel": {
     "presets": [
       "es2015",
       "stage-2"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          ["__coverage__", {"ignore": "*.test.*"}]
+        ]
+      }
+    }
   },
   "scripts": {
     "prebuild": "rimraf dist",
@@ -104,9 +111,12 @@
     "watch:test": "npm t -- --auto-watch --no-single-run",
     "test:mocka": "mocha src/js/**/*.test.js  --compilers js:babel-register",
     "watch:mocka:test": "npm t -- --watch",
-    "check-coverage": "istanbul check-coverage --statements 11 --branches 0 --functions 0 --lines 12",
-    "validate": "npm-run-all --parallel lint test",
-    "validate:webpack": "webpack-validator webpack.config.js --env.prod",
+    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "validate": "npm-run-all --parallel lint test --serial check-coverage",
+    "validate-webpack": "npm-run-all --parallel validate-webpack:*",
+    "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev",
+    "validate-webpack:prod": "webpack-validator webpack.config.js --env.prod",
+    "open-coverage": "open coverage/lcov-report/index.html",
     "lint": "eslint ./src",
     "setup": "npm install && npm run validate",
     "deploy": "npm run build && firebase deploy",

@@ -1,17 +1,26 @@
 const webpackEnv = {test:true}
 const webpackConfig = require('./webpack.config.js')(webpackEnv)
-const fileGlob = 'src/js/**/*.test.js'
+const testGlob = 'src/js/**/*.test.js'
+// const srcGlob = 'src/js/**/*!(test|stub).js'
+process.env.BABEL_ENV = 'test'
 module.exports = function setKarmaConfig(config) {
   config.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
-    files: [fileGlob],
+    files: [testGlob],
     preprocessors: {
-      [fileGlob]: ['webpack']
+      [testGlob]: ['webpack']
     },
     webpack: webpackConfig,
     webpackMiddleware: {noInfo:true},
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      reporters: [
+        {type: 'lcov', dir: 'coverage/', subdir: '.'},
+        {type: 'json', dir: 'coverage/', subdir: '.'},
+        {type: 'text-summary'}
+      ]
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

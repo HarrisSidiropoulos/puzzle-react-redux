@@ -1,3 +1,4 @@
+/* eslint no-console: */
 const {resolve} = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -11,16 +12,24 @@ module.exports = env => {
   const ifProd = value => specifyProp(env.prod, value)
   const ifDev = value => specifyProp(!env.prod, value)
   const removeEmpty = array => array.filter(i => !!i)
+  const removeEmptyProperties = obj => {
+    for (var i in obj) {
+      if (obj[i] === null || obj[i] === undefined) {
+        delete obj[i];
+      }
+    }
+    return obj;
+  }
   const assetsPath = env.prod?'assets/':''
   const indexPath = env.prod?'../':''
   return {
-    entry: {
-      vendor: ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux'],
+    entry: removeEmptyProperties({
+      vendor: ifProd(['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux']),
       app: removeEmpty([
         ifDev('webpack-hot-middleware/client?reload=true'),
         './js/index.js'
       ])
-    },
+    }),
     output: {
       filename: env.prod ? 'bundle.[name].[chunkhash].js' : '[name].js',
       path: resolve(__dirname, `dist/${assetsPath}`),
@@ -28,7 +37,7 @@ module.exports = env => {
       publicPath: assetsPath
     },
     context: resolve(__dirname, 'src'),
-    devtool: env.prod ? 'source-map' : 'eval-source-map',
+    devtool: env.prod ? 'eval' : 'eval-source-map',
     module: {
       loaders: removeEmpty([
         {test: /\.js$/, loader: 'babel', query: { "presets": removeEmpty(["es2015-webpack", "stage-2", "react", ifDev("react-hmre")]) }, exclude: /node_modules/},
