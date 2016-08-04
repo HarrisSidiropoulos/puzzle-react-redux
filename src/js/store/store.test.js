@@ -19,10 +19,12 @@ describe('Store', () => {
     });
   });
   describe('initAndShufflePuzzle', ()=> {
-    it('should be true', () => {
-      const initAction = initAndShufflePuzzle()
+    const initAction = store.dispatch(initAndShufflePuzzle())
+    it('should be initial state', () => {
       expect(store.getState().puzzle.parts).to.satisfy((parts)=> parts.every(({index},i)=>index===i))
-      store.dispatch(initAction).then(()=> {
+    });
+    it('should shuffle puzzle', () => {
+      initAction.then(()=> {
         expect(store.getState().puzzle.parts).to.not.satisfy((parts)=> parts.every(({index},i)=>index===i))
       })
     });
