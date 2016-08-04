@@ -52,6 +52,17 @@ module.exports = env => {
     },
     recordsPath: resolve(__dirname, './webpack-records.json'),
     plugins: removeEmpty([
+      ifProd(new webpack.optimize.DedupePlugin()),
+      ifProd(new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+      })),
+      ifProd(new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          screw_ie8:true,
+          warnings: false
+        }
+      })),
       ifProd(new webpack.optimize.CommonsChunkPlugin({name:'vendor'})),
       ifProd(new ExtractTextPlugin('bundle.[name]-[hash].min.css')),
       new HtmlWebpackPlugin({
