@@ -31,7 +31,7 @@ module.exports = env => {
     devtool: env.prod ? 'source-map' : 'eval-source-map',
     module: {
       loaders: removeEmpty([
-        {test: /\.js$/, loader: 'babel', query: { "presets": removeEmpty(["es2015", "stage-2", "react", ifDev("react-hmre")]) }, exclude: /node_modules/},
+        {test: /\.js$/, loader: 'babel', query: { "presets": removeEmpty(["es2015-webpack", "stage-2", "react", ifDev("react-hmre")]) }, exclude: /node_modules/},
         {test: /\.jade$/, loader: 'jade'},
         ifDev({test: /\.css$/,   loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'}),
         ifDev({test: /\.scss$/,  loaders: ["style", "css", "sass?sourceMap"]}),
