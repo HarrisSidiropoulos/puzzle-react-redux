@@ -22,7 +22,7 @@ module.exports = env => {
   }
   const assetsPath = env.prod?'assets/':''
   const indexPath = env.prod?'../':''
-  return {
+  return removeEmptyProperties({
     entry: removeEmptyProperties({
       vendor: ifProd(['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux']),
       app: removeEmpty([
@@ -37,7 +37,7 @@ module.exports = env => {
       publicPath: assetsPath
     },
     context: resolve(__dirname, 'src'),
-    devtool: env.prod ? 'eval' : 'eval-source-map',
+    devtool: ifDev('eval-source-map'),
     module: {
       loaders: removeEmpty([
         {test: /\.js$/, loader: 'babel', query: { "presets": removeEmpty(["es2015-webpack", "stage-2", "react", ifDev("react-hmre")]) }, exclude: /node_modules/},
@@ -89,5 +89,5 @@ module.exports = env => {
       new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(env.prod ?'production':'development')}),
       ifProd(new OfflinePlugin({ServiceWorker:{events:true}}))
     ])
-  }
+  })
 }
