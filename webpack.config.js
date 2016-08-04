@@ -11,19 +11,22 @@ module.exports = env => {
   const specifyProp = (add, value) => add ? value : undefined
   const ifProd = value => specifyProp(env.prod, value)
   const ifDev = value => specifyProp(!env.prod, value)
-  const removeEmpty = array => array.filter(i => !!i)
-  const removeEmptyProperties = obj => {
-    for (var i in obj) {
-      if (obj[i] === null || obj[i] === undefined) {
-        delete obj[i];
+  const removeEmpty = obj => {
+    if (Array.isArray(obj)) {
+      obj = obj.filter(i => !!i)
+    } else {
+      for (var i in obj) {
+        if (obj[i] === null || obj[i] === undefined) {
+          delete obj[i];
+        }
       }
     }
     return obj;
   }
   const assetsPath = env.prod?'assets/':''
   const indexPath = env.prod?'../':''
-  return removeEmptyProperties({
-    entry: removeEmptyProperties({
+  return removeEmpty({
+    entry: removeEmpty({
       vendor: ifProd(['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux']),
       app: removeEmpty([
         ifDev('webpack-hot-middleware/client?reload=true'),
