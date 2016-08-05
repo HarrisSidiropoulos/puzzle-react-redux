@@ -9,7 +9,7 @@ import OfflineUpdate from './index'
 function applyUpdate() {}
 
 function getMainJSX(env='development', state='') {
-  function install({onInstalled,onUpdating,onUpdateReady,onUpdateFailed,onUpdated}) {
+  function install({onInstalled,onUpdating,onUpdateReady,onUpdateFailed,onUpdated,onDismiss}) {
     switch(state) {
       case 'onInstalled':
         onInstalled()
@@ -25,6 +25,9 @@ function getMainJSX(env='development', state='') {
         break;
       case 'onUpdated':
         onUpdated()
+        break;
+      case 'onDismiss':
+        onDismiss()
         break;
     }
   }
@@ -63,6 +66,11 @@ describe('OfflineUpdate', ()=> {
   describe('onUpdated', ()=> {
     it('should have class hidden', ()=> {
       expect(getMainJSX('production', 'onUpdated')).to.include("hidden")
+    });
+  })
+  describe('onDismiss', ()=> {
+    it('should have class hidden', ()=> {
+      expect(getMainJSX('production', 'onDismiss')).to.include("hidden")
     });
   })
 });

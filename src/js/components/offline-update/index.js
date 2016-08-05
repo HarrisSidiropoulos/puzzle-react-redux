@@ -19,7 +19,9 @@ class OfflineUpdate extends Component {
       onUpdating: ()=> this.onUpdating(),
       onUpdateReady: ()=> this.onUpdateReady(),
       onUpdateFailed: ()=> this.onUpdateFailed(),
-      onUpdated: ()=> this.onUpdated()
+      onUpdated: ()=> this.onUpdated(),
+      onReload: ()=> this.reload(),
+      onDismiss: ()=> this.dismiss()
     })
   }
   onInstalled() {
