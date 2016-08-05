@@ -18,10 +18,10 @@ function getMainJSX(env='development') {
 }
 
 describe('OfflineUpdate', ()=> {
-  it('should have class hidden', ()=> {
+  it('should have class hidden in development', ()=> {
     expect(getMainJSX()).to.include("hidden")
   })
-  it('should not have class hidden', ()=> {
+  it('should have class hidden in production', ()=> {
     expect(getMainJSX('production')).to.include("hidden")
   })
 });
