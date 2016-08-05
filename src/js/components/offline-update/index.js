@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 require('./styles.scss')
 
 class OfflineUpdate extends Component {
@@ -10,10 +10,10 @@ class OfflineUpdate extends Component {
       message: "Quiz has been updated.",
       hidden: true
     }
-    if (process.env.NODE_ENV!=='production') { //eslint-disable-line
+    if (props.NODE_ENV!=='production') { //eslint-disable-line
       return;
     }
-    const {install} = require('offline-plugin/runtime')
+    const {install} = props
     install({
       onInstalled: ()=> this.onInstalled(),
       onUpdating: ()=> this.onUpdating(),
@@ -35,7 +35,7 @@ class OfflineUpdate extends Component {
     })
   }
   onUpdateReady() {
-    const {applyUpdate} = require('offline-plugin/runtime')
+    const {applyUpdate} = this.props
     console.log("onUpdateReady")
     applyUpdate()
     this.setState({
@@ -95,6 +95,16 @@ class OfflineUpdate extends Component {
       </div>
     )
   }
+}
+
+OfflineUpdate.propTypes = {
+  NODE_ENV: PropTypes.string.isRequired,
+  install: PropTypes.func.isRequired,
+  applyUpdate: PropTypes.func.isRequired
+}
+
+OfflineUpdate.defaultProps = {
+  NODE_ENV: 'development'
 }
 
 export default OfflineUpdate

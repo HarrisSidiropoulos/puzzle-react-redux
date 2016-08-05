@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {checkPuzzlePartPosition, initAndShufflePuzzle} from '../actions'
 import OfflineUpdate from './offline-update'
 import {getStyles, getBgImageStyles, getSizeStyles} from './styles'
+import offlineProps from './offline-update/offline-props'
 
 require('./styles.scss')
 const images = [
@@ -19,7 +20,7 @@ export class Main extends Component {
     const {parts, partClick, isPuzzleSolved, shufflePuzzle} = this.props
     return (
       <div>
-        <OfflineUpdate />
+        <OfflineUpdate {...offlineProps()}/>
         <div className={isPuzzleSolved?'container solved':'container'}>
           <ul className="puzzle" style={getBgImageStyles(isPuzzleSolved, images)}>
             {
