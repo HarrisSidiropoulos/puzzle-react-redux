@@ -7,6 +7,9 @@ export const getStyles = ({x,y,w,h,bx,by}, images)=> {
   }
 }
 export const getBgImageStyles = (solved=true, images=[])=> {
+  if (images.length==0) {
+    throw(new Error('Images array must not be empty'))
+  }
   return solved ? {
     backgroundImage: `url(${images[0]})`
   } : {}
