@@ -1,6 +1,6 @@
 import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {checkPuzzlePartPosition, initAndShufflePuzzle} from 'actions'
+import {checkPuzzlePartPosition, initAndShufflePuzzle} from '../actions'
 import OfflineUpdate from './offline-update'
 import {getStyles, getBgImageStyles, getSizeStyles} from './styles'
 
@@ -10,7 +10,7 @@ const images = [
   require('./images/image002.jpg')
 ]
 
-class Main extends Component {
+export class Main extends Component {
   constructor(props) {
     super(props);
     props.shufflePuzzle()
@@ -46,8 +46,8 @@ Main.propTypes = {
   partClick: PropTypes.func
 }
 
-const mapStateToProps = ({ puzzle } ) => puzzle;
-const mapDispatchToProps = (dispatch) => ({
+export const mapStateToProps = ({ puzzle } ) => puzzle;
+export const mapDispatchToProps = (dispatch) => ({
   partClick: index => dispatch(checkPuzzlePartPosition(index)),
   shufflePuzzle: ()=> dispatch(initAndShufflePuzzle())
 })
