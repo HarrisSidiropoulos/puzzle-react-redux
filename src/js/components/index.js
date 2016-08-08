@@ -2,8 +2,8 @@ import React, {Component,PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {checkPuzzlePartPosition, initAndShufflePuzzle} from '../actions'
 import OfflineUpdate from './offline-update'
-import {getStyles, getBgImageStyles, getSizeStyles} from './styles'
 import offlineProps from './offline-update/offline-props'
+import {getStyles, getBgImageStyles, getSizeStyles} from './styles'
 
 require('./styles.scss')
 const images = [
